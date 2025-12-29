@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> Artists Collection - SERENITY</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between logo image and text */
+}
+
+.logo-img {
+  width: 40px;  /* adjust size */
+  height: 40px; /* adjust size */
+  object-fit: contain;
+}
+
+/* Navbar */
+.navbar { position:fixed; top:0; width:100%; background:rgba(0,0,0,0.85); padding:15px 40px; display:flex; justify-content:space-between; align-items:center; z-index:1000; backdrop-filter:blur(8px);}
+.logo { display:flex; align-items:center; gap:10px; font-weight:bold; font-size:24px; color:#1DB954; }
+.logo-img { width:40px; height:40px; object-fit:contain; }
+.navbar nav a { color:white; margin:0 12px; text-decoration:none; font-weight:500; transition:0.3s; }
+.navbar nav a:hover, .navbar nav a.active { color:#1DB954; }
+/* Global & Grid */
+body { background:#121212; color:#e0e0e0; font-family:'Poppins', sans-serif; margin:0; padding-top:70px; }
+h1 { text-align:center; padding:30px 0; font-weight:700; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:30px; padding:20px 5%; max-width:1200px; margin:0 auto; }
+.card { background:#1e1e1e; border-radius:15px; padding:20px; text-align:center; box-shadow:0 4px 15px rgba(0,0,0,0.4); display:flex; flex-direction:column; justify-content:space-between; transition:0.3s; }
+.card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.8),0 0 10px #bb86fc; }
+.card img { width:100%; border-radius:10px; margin-bottom:15px; box-shadow:0 2px 10px rgba(0,0,0,0.8); }
+.card h3 { font-size:1.25em; margin:5px 0 2px; font-weight:600; }
+.card p { opacity:0.7; margin-bottom:15px; font-size:0.9em; }
+.card button { background:#bb86fc; color:#121212; border:none; padding:10px 15px; border-radius:8px; cursor:pointer; font-weight:600; margin-top:auto; transition:0.2s; }
+.card button:hover { background:#cfbcff; }
+
+/* Popup */
+#popup { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); width:90%; max-width:450px; background:#252525; border-radius:20px; padding:30px; color:white; display:none; opacity:0; pointer-events:none; transition:0.4s cubic-bezier(0.25,0.8,0.25,1); z-index:999; text-align:center; box-shadow:0 10px 40px rgba(0,0,0,0.8),0 0 20px #bb86fc; border:1px solid rgba(187,134,252,0.3); }
+#popup.active { opacity:1; pointer-events:auto; }
+.close-btn { position:absolute; top:15px; right:20px; cursor:pointer; font-size:24px; color:#e0e0e0; opacity:0.8; transition:0.2s; }
+.close-btn:hover { color:#bb86fc; opacity:1; }
+.artist-icon { width:80px; height:80px; background:#bb86fc; border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; font-size:36px; font-weight:700; color:#121212; box-shadow:0 0 15px rgba(187,134,252,0.5); }
+#artistName { margin-bottom:10px; color:#bb86fc; font-weight:700; font-size:1.8em; }
+#artistBio { margin-top:15px; font-size:1em; text-align:justify; padding-top:10px; border-top:1px dashed rgba(255,255,255,0.1); max-height:300px; overflow-y:auto; }
+
+/* Blur background */
+#blur-bg { position:fixed; top:0; left:0; width:100%; height:100%; backdrop-filter:blur(0px); background:rgba(0,0,0,0); z-index:900; display:none; transition:0.4s ease; }
+#blur-bg.active { backdrop-filter:blur(8px); background:rgba(0,0,0,0.7); }
+
+/* Responsive */
+@media (max-width:768px){ .grid{gap:20px;} .card img{height:auto;} }
+</style>
+</head>
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="logo">
+    <img src="logo.jpg" alt="Serenity Logo" class="logo-img">
+    SERENITY
+  </div>
+  <nav>
+    
+     <a href="index.html">HOME</a>
+  <a href="artists.html" class="active">ARTISTS</a>
+    <a href="about us.html">ABOUT US</a>
+    <a href="playlist.html">PLAYLIST</a>
+    <a href="login.html">LOGIN</a>
+    <a href="signup.html">SIGNUP</a>
+ <a href="help.html">HELP</a>
+  </nav>
+</header>
+
+<!-- Blur background -->
+<div id="blur-bg"></div>
+
+<!-- Popup -->
+<div id="popup">
+  <div class="close-btn" onclick="hideInfo()">✖</div>
+  <div class="artist-icon" id="artistInitial"></div>
+  <h2 id="artistName"></h2>
+  <p id="artistBio"></p>
+</div>
+
+<h1>Artists Collection</h1>
+<div class="grid">
+  <div class="card">
+    <img src="bts.jpg" alt="Map of the Soul: 7 by BTS">
+    <h3>Map of the Soul: 7</h3>
+    <p>BTS</p>
+    <button onclick="showInfo('BTS')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="blackpink.jpg" alt="The Album by BLACKPINK">
+    <h3>The Album</h3>
+    <p>BLACKPINK</p>
+    <button onclick="showInfo('BLACKPINK')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="conan gray.png.png" alt="Kid Krow by Conan Gray">
+    <h3>Kid Krow</h3>
+    <p>Conan Gray</p>
+    <button onclick="showInfo('Conan Gray')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="hasan.jpg" alt="Nautanki by Hasan Raheem">
+    <h3>Nautanki</h3>
+    <p>Hasan Raheem</p>
+    <button onclick="showInfo('Hasan Raheem')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="billie.jpg" alt="Happier Than Ever by Billie Eilish">
+    <h3>Happier Than Ever</h3>
+    <p>Billie Eilish</p>
+    <button onclick="showInfo('Billie Eilish')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="lana del.jpg" alt="Chemtrails over the Country Club by Lana Del Rey">
+    <h3>Chemtrails over the Country Club</h3>
+    <p>Lana Del Rey</p>
+    <button onclick="showInfo('Lana Del Rey')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="shawn.jpg" alt="Wonder by Shawn Mendes">
+    <h3>Wonder</h3>
+    <p>Shawn Mendes</p>
+    <button onclick="showInfo('Shawn Mendes')">View Artist</button>
+  </div>
+  <div class="card">
+    <img src="katseye.jpg" alt="Born from Stars by KATSEYE">
+    <h3>Born from Stars</h3>
+    <p>KATSEYE</p>
+    <button onclick="showInfo('KATSEYE')">View Artist</button>
+  </div>
+</div>
+
+<script>
+const info = {
+  "BTS": { bio: "BTS is a global K-pop sensation renowned for their self-produced music, tackling social issues, and promoting self-love. Formed in 2013, they've broken numerous records and built a massive, dedicated international fanbase called ARMY.", initial:"B" },
+  "BLACKPINK": { bio: "BLACKPINK is a globally dominant K-pop girl group known for their fierce, 'girl crush' concept and impactful music that fuses EDM, pop, and hip-hop.", initial:"B" },
+  "Conan Gray": { bio: "Conan Gray is an American singer-songwriter who gained prominence through YouTube before launching a successful music career. His style is characterized by emotional, bedroom-pop anthems.", initial:"C" },
+  "Hasan Raheem": { bio: "Hasan Raheem is a Pakistani indie artist who has become a leading voice in the country's alternative music scene. He is celebrated for his unique blend of chilled-out R&B and soulful vocals.", initial:"H" },
+  "Billie Eilish": { bio: "Billie Eilish is an American singer-songwriter known for her dark, ethereal, and genre-defying music. She has received multiple Grammy Awards and acclaim for pushing the boundaries of pop music.", initial:"B" },
+  "Lana Del Rey": { bio: "Lana Del Rey is an American singer-songwriter celebrated for her cinematic, melancholic pop sound that blends nostalgic Americana with modern indie influences.", initial:"L" },
+  "Shawn Mendes": { bio: "Shawn Mendes is a Canadian singer-songwriter who rose to fame on Vine before becoming a global pop superstar. He is celebrated for heartfelt, acoustic-driven pop songs and powerful vocals.", initial:"S" },
+  "KATSEYE": { bio: "KATSEYE is a multinational girl group formed through a globally televised competition, aiming to deliver a futuristic global pop sound with high-concept visuals and choreography.", initial:"K" }
+};
+
+function showInfo(name){
+  const popup=document.getElementById("popup");
+  const blurBg=document.getElementById("blur-bg");
+  const artistData=info[name];
+
+  document.getElementById("artistName").innerText=name;
+  document.getElementById("artistBio").innerText=artistData.bio;
+  document.getElementById("artistInitial").innerText=artistData.initial;
+
+  popup.style.display="block";
+  blurBg.style.display="block";
+
+  setTimeout(()=>{
+    popup.classList.add("active");
+    blurBg.classList.add("active");
+  },10);
+}
+
+function hideInfo(){
+  const popup=document.getElementById("popup");
+  const blurBg=document.getElementById("blur-bg");
+
+  popup.classList.remove("active");
+  blurBg.classList.remove("active");
+
+  setTimeout(()=>{
+    popup.style.display="none";
+    blurBg.style.display="none";
+  },400);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>SERENITY – Playlists</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
+
+body{
+  background:#121212;
+  color:white;
+  padding-top:80px;
+}
+
+/* NAVBAR */
+.navbar{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#000;
+  padding:15px 40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+}
+
+.logo{
+  color:#1DB954;
+  font-size:24px;
+  font-weight:700;
+}
+ .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* space between logo image and text */
+}
+
+.logo-img {
+  width: 40px;  /* adjust size */
+  height: 40px; /* adjust size */
+  object-fit: contain;
+}
+
+.navbar a{
+  color:white;
+  margin-left:20px;
+  text-decoration:none;
+}
+.navbar a:hover{color:#1DB954}
+
+/* CONTAINER */
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:30px 20px;
+}
+
+h1{margin-bottom:30px}
+
+/* SONG CARD */
+.song{
+  display:flex;
+  align-items:center;
+  gap:20px;
+  background:#181818;
+  padding:18px;
+  border-radius:14px;
+  margin-bottom:18px;
+  transition:0.3s;
+}
+
+.song:hover{
+  background:#222;
+}
+
+/* COVER */
+.song img{
+  width:70px;
+  height:70px;
+  border-radius:10px;
+  object-fit:cover;
+}
+
+/* INFO */
+.song-info{
+  flex:1;
+}
+.song-info strong{
+  font-size:16px;
+}
+.song-info p{
+  font-size:13px;
+  color:#aaa;
+}
+
+/* CONTROLS */
+.controls{
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+
+/* PLAY BUTTON */
+.play-btn{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  background:#1DB954;
+  color:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.play-btn:hover{
+  transform:scale(1.15);
+}
+
+/* PROGRESS */
+.progress{
+  width:220px;
+}
+.progress input{
+  width:100%;
+}
+
+/* TIME */
+.time{
+  font-size:12px;
+  color:#aaa;
+  min-width:70px;
+}
+
+/* HIDE AUDIO */
+audio{display:none}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:50px;
+  color:gray;
+}
+</style>
+</head>
+
+<body>
+
+<script>
+if(localStorage.getItem("isLoggedIn") !== "true"){
+  alert("Please login first 🎧");
+  location.href="login.html";
+}
+</script>
+<header class="navbar">
+  <div class="logo">
+    <img src="logo.jpg" alt="Serenity Logo" class="logo-img">
+    SERENITY
+  </div>
+<div>
+    <a href="index.html">Home</a>
+    <a href="#" onclick="logout()">Logout</a>
+  </div>
+</header>
+
+<div class="container">
+<h1>Your Playlist</h1>
+
+<!-- SONGS 1–20 -->
+<!-- COPY STYLE SAME FOR ALL -->
+
+<!-- SONG 1 -->
+<div class="song">
+  <img src="covers/lost.png">
+  <div class="song-info"><strong>Lost N Found</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio1')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio1')"></div>
+    <div class="time" id="time1">0:00</div>
+  </div>
+  <audio id="audio1" src="songs/lost n found.mp3"></audio>
+</div>
+
+<!-- SONG 2 -->
+<div class="song">
+  <img src="covers/Aata Nahi.png">
+  <div class="song-info"><strong>Aata Nahi</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio2')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio2')"></div>
+    <div class="time" id="time2">0:00</div>
+  </div>
+  <audio id="audio2" src="songs/Aata Nahi.mp3"></audio>
+</div>
+
+<!-- SONG 3 -->
+<div class="song">
+  <img src="covers/happier.jpg">
+  <div class="song-info"><strong>Happier Than Ever</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio3')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio3')"></div>
+    <div class="time" id="time3">0:00</div>
+  </div>
+  <audio id="audio3" src="songs/Happier Than Ever.mp3"></audio>
+</div>
+
+<!-- SONG 4 -->
+<div class="song">
+  <img src="covers/jhol.png">
+  <div class="song-info"><strong>Jhol</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio4')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio4')"></div>
+    <div class="time" id="time4">0:00</div>
+  </div>
+  <audio id="audio4" src="songs/jhol.mp3"></audio>
+</div>
+
+<!-- SONG 5 -->
+<div class="song">
+  <img src="covers/pretty.png">
+  <div class="song-info"><strong>PRETTY BOY</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio5')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio5')"></div>
+    <div class="time" id="time5">0:00</div>
+  </div>
+  <audio id="audio5" src="songs/Pretty boy.mp3"></audio>
+</div>
+
+<!-- SONG 6 -->
+<div class="song">
+  <img src="covers/bachana.png">
+  <div class="song-info"><strong>BACHANA</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio6')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio6')"></div>
+    <div class="time" id="time6">0:00</div>
+  </div>
+  <audio id="audio6" src="songs/Bachana.mp3"></audio>
+</div>
+
+<!-- SONG 7 -->
+<div class="song">
+  <img src="covers/likejennie.png">
+  <div class="song-info"><strong>LIKE JENNIE</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio7')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio7')"></div>
+    <div class="time" id="time7">0:00</div>
+  </div>
+  <audio id="audio7" src="songs/like jennie.mp3"></audio>
+</div>
+<!-- SONG 8 -->
+<div class="song">
+  <img src="covers/stay.png">
+  <div class="song-info"><strong>STAY</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio8')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio8')"></div>
+    <div class="time" id="time8">0:00</div>
+  </div>
+  <audio id="audio8" src="songs/STAY.mp3"></audio>
+</div>
+
+<!-- SONG 9 -->
+<div class="song">
+  <img src="covers/scott.png">
+  <div class="song-info"><strong>SCOTT STREET</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio9')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio9')"></div>
+    <div class="time" id="time9">0:00</div>
+  </div>
+  <audio id="audio9" src="songs/scott.mp3"></audio>
+</div>
+
+<!-- SONG 10 -->
+<div class="song">
+  <img src="covers/one.png">
+  <div class="song-info"><strong>ONE OF THE GIRLS</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio10')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio10')"></div>
+    <div class="time" id="time10">0:00</div>
+  </div>
+  <audio id="audio10" src="songs/one of the girls.mp3"></audio>
+</div>
+
+<!-- SONG 11 -->
+<div class="song">
+  <img src="covers/ja.png">
+  <div class="song-info"><strong>PIGHAL JA</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio11')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio11')"></div>
+    <div class="time" id="time11">0:00</div>
+  </div>
+  <audio id="audio11" src="songs/pighal ja.mp3"></audio>
+</div>
+
+<!-- SONG 12 -->
+<div class="song">
+  <img src="covers/barse.png">
+  <div class="song-info"><strong>BARSE NAINA</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio12')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio12')"></div>
+    <div class="time" id="time12">0:00</div>
+  </div>
+  <audio id="audio12" src="songs/barse.mp3"></audio>
+</div>
+
+<!-- SONG 13 -->
+<div class="song">
+  <img src="covers/dard.png">
+  <div class="song-info"><strong>DARD</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio13')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio13')"></div>
+    <div class="time" id="time13">0:00</div>
+  </div>
+  <audio id="audio13" src="songs/dard.mp3"></audio>
+</div>
+
+<!-- SONG 14 -->
+<div class="song">
+  <img src="covers/1and.png">
+  <div class="song-info"><strong>1%ONLY</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio14')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio14')"></div>
+    <div class="time" id="time14">0:00</div>
+  </div>
+  <audio id="audio14" src="songs/1and.mp3"></audio>
+</div>
+
+<!-- SONG 15 -->
+<div class="song">
+  <img src="covers/bhool.png">
+  <div class="song-info"><strong>BHOOL</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio15')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio15')"></div>
+    <div class="time" id="time15">0:00</div>
+  </div>
+  <audio id="audio15" src="songs/bhool.mp3"></audio>
+</div>
+
+<!-- SONG 16 -->
+<div class="song">
+  <img src="covers/safar.png">
+  <div class="song-info"><strong>SAFAR</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio16')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio16')"></div>
+    <div class="time" id="time16">0:00</div>
+  </div>
+  <audio id="audio16" src="songs/safar.mp3"></audio>
+</div>
+
+<!-- SONG 17 -->
+<div class="song">
+  <img src="covers/chan.png">
+  <div class="song-info"><strong>CHAN MAHIYA</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio17')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio17')"></div>
+    <div class="time" id="time17">0:00</div>
+  </div>
+  <audio id="audio17" src="songs/chan.mp3"></audio>
+</div>
+
+<!-- SONG 18 -->
+<div class="song">
+  <img src="covers/treat.png">
+  <div class="song-info"><strong>TREAT YOU BETTER</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio18')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio18')"></div>
+    <div class="time" id="time18">0:00</div>
+  </div>
+  <audio id="audio18" src="songs/TREAT.mp3"></audio>
+</div>
+
+<!-- SONG 19 -->
+<div class="song">
+  <img src="covers/maanu.png">
+  <div class="song-info"><strong>SAMNAY</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio19')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio19')"></div>
+    <div class="time" id="time19">0:00</div>
+  </div>
+  <audio id="audio19" src="songs/samnay.mp3"></audio>
+</div>
+
+<!-- SONG 20 -->
+<div class="song">
+  <img src="covers/changi.png">
+  <div class="song-info"><strong>CHANGIYAAN</strong><p>Serenity</p></div>
+  <div class="controls">
+    <div class="play-btn" onclick="togglePlay(this,'audio20')">▶</div>
+    <div class="progress"><input type="range" value="0" min="0" max="100" oninput="seek(this,'audio20')"></div>
+    <div class="time" id="time20">0:00</div>
+  </div>
+  <audio id="audio20" src="songs/changi.mp3"></audio>
+</div>
+
+
+</div>
+
+<footer>© 2025 SERENITY | Designed with 💚 by Rida</footer>
+
+<script>
+let currentAudio = null;
+let currentBtn = null;
+
+function togglePlay(btn, audioId){
+  const audio = document.getElementById(audioId);
+
+  if(currentAudio && currentAudio !== audio){
+    currentAudio.pause();
+    currentBtn.innerHTML = "▶";
+  }
+
+  if(audio.paused){
+    audio.play();
+    btn.innerHTML = "❚❚";
+    currentAudio = audio;
+    currentBtn = btn;
+  }else{
+    audio.pause();
+    btn.innerHTML = "▶";
+  }
+
+  audio.ontimeupdate = () => {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    btn.parentElement.querySelector("input").value = percent;
+    document.getElementById("time"+audioId.replace("audio","")).innerText =
+      formatTime(audio.currentTime);
+  };
+
+  audio.onended = () => btn.innerHTML = "▶";
+}
+
+function seek(slider, audioId){
+  const audio = document.getElementById(audioId);
+  audio.currentTime = (slider.value / 100) * audio.duration;
+}
+
+function formatTime(t){
+  const m = Math.floor(t / 60);
+  const s = Math.floor(t % 60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+
+function logout(){
+  localStorage.removeItem("isLoggedIn");
+  location.href="login.html";
+}
+</script>
+
+</body>
+</html>

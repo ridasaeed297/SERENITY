@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us - SERENITY</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* Global */
+* { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins', sans-serif; }
+body { background:#121212; color:#fff; overflow-x:hidden; padding-top:70px; }
+
+/* Navbar */
+.navbar {
+  position:fixed; top:0; width:100%;
+  background:rgba(0,0,0,0.85);
+  padding:15px 40px;
+  display:flex; justify-content:space-between; align-items:center;
+  z-index:1000; backdrop-filter:blur(8px);
+}
+.logo { display:flex; align-items:center; gap:10px; font-weight:bold; font-size:24px; color:#1DB954; }
+.logo-img { width:40px; height:40px; object-fit:contain; }
+.navbar nav a {
+  color:white; margin:0 12px; text-decoration:none; font-weight:500;
+  transition:0.3s;
+}
+.navbar nav a:hover, .navbar nav a.active { color:#1DB954; }
+
+/* Hero */
+.hero {
+  text-align:center;
+  padding:120px 20px 90px;
+  background:linear-gradient(180deg, #000, #121212);
+}
+.hero h1 { font-size:50px; }
+.hero span { color:#1DB954; }
+.hero p {
+  max-width:900px;
+  margin:25px auto;
+  font-size:20px;
+  color:#bbb;
+  line-height:1.6;
+}
+
+/* Hero Stats */
+.hero-stats{
+  margin-top:40px;
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+}
+.hero-stats div h3{
+  color:#1DB954;
+  font-size:26px;
+}
+.hero-stats div p{
+  color:#bbb;
+  font-size:15px;
+}
+
+/* Sections */
+.section {
+  max-width:1100px;
+  margin:70px auto;
+  padding:0 20px;
+}
+.section h2 {
+  font-size:36px;
+  color:#1DB954;
+  margin-bottom:20px;
+}
+.section p {
+  font-size:18px;
+  line-height:1.7;
+  color:#ddd;
+}
+
+/* Cards */
+.cards {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+.card {
+  background:rgba(40,40,40,0.85);
+  border-radius:18px;
+  padding:30px;
+  text-align:center;
+  transition:0.3s;
+}
+.card:hover {
+  transform:translateY(-10px) scale(1.03);
+  background:#1db9542a;
+}
+.card h3 { margin-bottom:12px; }
+.card p { font-size:16px; color:#ccc; }
+
+/* Timeline */
+.timeline {
+  margin-top:50px;
+  border-left:3px solid #1DB954;
+  padding-left:30px;
+}
+.event {
+  margin-bottom:30px;
+  opacity:0;
+  transform:translateX(-20px);
+  transition:0.6s;
+}
+.event.visible {
+  opacity:1;
+  transform:translateX(0);
+}
+.event h4 { color:#1DB954; margin-bottom:5px; }
+
+/* Team */
+.team-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:30px;
+  margin-top:40px;
+}
+.team-card {
+  background:rgba(40,40,40,0.85);
+  border-radius:20px;
+  padding:30px 20px;
+  text-align:center;
+  transition:0.3s;
+}
+.team-card:hover {
+  transform:translateY(-12px) scale(1.04);
+  background:#1db9542a;
+}
+.team-card img {
+  width:120px;
+  height:120px;
+  object-fit:cover;
+  border-radius:50%;
+  border:3px solid #1DB954;
+  margin-bottom:15px;
+}
+.team-card h3 { font-size:20px; }
+.team-card p { font-size:15px; color:#bbb; }
+
+/* CTA */
+.cta {
+  background:linear-gradient(135deg, #121212 0%, #1DB954 100%);
+  text-align:center;
+  padding:80px 20px;
+  margin-top:80px;
+}
+.cta h2 { font-size:42px; }
+.cta p { font-size:20px; margin:15px 0 30px; }
+.cta a {
+  background:#fff;
+  color:#121212;
+  padding:14px 34px;
+  border-radius:40px;
+  font-size:18px;
+  text-decoration:none;
+  font-weight:600;
+  transition:0.3s;
+}
+.cta a:hover {
+  transform:scale(1.1);
+  box-shadow:0 0 25px rgba(29,185,84,0.6);
+}
+
+/* Footer */
+footer {
+  background:#000;
+  text-align:center;
+  padding:20px;
+  color:gray;
+  font-size:14px;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .hero h1 { font-size:38px; }
+  .section h2 { font-size:30px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navbar -->
+<header class="navbar">
+  <div class="logo">
+    <img src="logo.jpg" class="logo-img" alt="Serenity Logo">
+    SERENITY
+  </div>
+  <nav>
+    <a href="index.html">HOME</a>
+    <a href="artists.html">ARTISTS</a>
+    <a href="aboutus.html" class="active">ABOUT US</a>
+    <a href="playlist.html">PLAYLIST</a>
+    <a href="login.html">LOGIN</a>
+    <a href="signup.html">SIGNUP</a>
+    <a href="help.html">HELP</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>About <span>SERENITY</span></h1>
+  <p>
+    SERENITY is more than just a music platform — it’s a digital sanctuary
+    where sound meets emotion. Built for music lovers, creators, and dreamers,
+    SERENITY helps you discover new voices, reconnect with timeless tracks,
+    and create moments that feel truly personal.
+  </p>
+
+  <div class="hero-stats">
+    <div>
+      <h3>🎧 10K+</h3>
+      <p>Tracks Curated</p>
+    </div>
+    <div>
+      <h3>🌍 Global</h3>
+      <p>Artists Community</p>
+    </div>
+    <div>
+      <h3>💚 Mood-Based</h3>
+      <p>Listening Experience</p>
+    </div>
+  </div>
+</section>
+
+<!-- Mission -->
+<section class="section">
+  <h2>Our Mission</h2>
+  <p>
+    Our mission is to connect people with music that speaks to their soul.
+    Whether you're discovering new artists, revisiting classics, or creating
+    your own playlists, SERENITY brings calm, inspiration, and connection
+    through sound.
+  </p>
+</section>
+
+<!-- Values -->
+<section class="section">
+  <h2>What We Believe In</h2>
+  <div class="cards">
+    <div class="card">
+      <h3>🎵 Music for Everyone</h3>
+      <p>Accessible, inclusive, and limitless sound.</p>
+    </div>
+    <div class="card">
+      <h3>🌍 Global Artists</h3>
+      <p>Celebrating diversity across cultures.</p>
+    </div>
+    <div class="card">
+      <h3>💚 Emotional Connection</h3>
+      <p>Music that feels personal and meaningful.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Journey -->
+<section class="section">
+  <h2>Our Journey</h2>
+  <div class="timeline">
+    <div class="event"><h4>2024 – Idea Born</h4><p>The beginning of SERENITY.</p></div>
+    <div class="event"><h4>2025 – Platform Launched</h4><p>A peaceful music experience.</p></div>
+    <div class="event"><h4>Future – Growing the Vibe</h4><p>More features, more connection.</p></div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section">
+  <h2>Meet Our Team</h2>
+  <div class="team-grid">
+    <div class="team-card"><img src="ri.jpeg"><h3>RIDA</h3><p>Founder & Designer</p></div>
+    
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Join the SERENITY Community</h2>
+  <p>Where music meets emotion.</p>
+  <a href="signup.html">Get Started</a>
+</section>
+
+<footer>
+  <p>© 2025 SERENITY | Designed with 💚 by Rida</p>
+</footer>
+
+<script>
+const events=document.querySelectorAll('.event');
+window.addEventListener('scroll',()=>{
+  events.forEach(e=>{
+    if(e.getBoundingClientRect().top<window.innerHeight-100){
+      e.classList.add('visible');
+    }
+  });
+});
+</script>
+
+</body>
+</html>

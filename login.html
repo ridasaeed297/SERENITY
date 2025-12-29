@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login – SERENITY</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:linear-gradient(#111,#000);
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  color:white;
+}
+
+/* Container */
+.container{
+  max-width:420px;
+  width:100%;
+  margin:120px auto 40px;
+  padding:40px;
+  text-align:center;
+}
+
+/* Logo */
+.logo{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-bottom:30px;
+}
+.logo img{width:45px;}
+.logo h2{color:#1DB954;font-size:26px;font-weight:700;}
+
+h1{
+  font-size:32px;
+  margin-bottom:25px;
+}
+
+/* Inputs */
+.input-box{
+  text-align:left;
+  margin-bottom:15px;
+}
+.input-box label{
+  font-size:14px;
+  font-weight:600;
+}
+.input-box input{
+  width:100%;
+  margin-top:8px;
+  padding:14px;
+  border-radius:6px;
+  border:1px solid #333;
+  background:#121212;
+  color:white;
+}
+.input-box input:focus{
+  outline:none;
+  border-color:#1DB954;
+}
+
+/* Error message */
+.error{
+  color:#ff4d4d;
+  font-size:13px;
+  margin-top:5px;
+  display:none;
+}
+
+/* Buttons */
+.btn{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+}
+.btn-green{
+  background:#1DB954;
+  color:black;
+  margin-top:15px;
+}
+.btn-green:hover{
+  background:#1ed760;
+}
+
+/* Divider */
+.divider{
+  margin:25px 0;
+  display:flex;
+  align-items:center;
+  color:#aaa;
+}
+.divider::before,
+.divider::after{
+  content:"";
+  flex:1;
+  height:1px;
+  background:#333;
+}
+.divider span{
+  margin:0 10px;
+}
+
+/* Social buttons */
+.social-btn{
+  width:100%;
+  padding:13px;
+  border-radius:30px;
+  background:#000;
+  border:1px solid #333;
+  color:white;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  font-weight:600;
+  margin-bottom:12px;
+  cursor:pointer;
+}
+.social-btn img{width:20px;}
+.social-btn:hover{background:#111;}
+
+.signup-text{
+  margin-top:25px;
+  font-size:14px;
+}
+.signup-text a{
+  color:#1DB954;
+  text-decoration:none;
+  font-weight:600;
+}
+.signup-text a:hover{text-decoration:underline;}
+
+/* Footer */
+footer{
+  background:#000;
+  text-align:center;
+  padding:15px;
+  color:gray;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- Logo -->
+  <div class="logo">
+    <img src="logo.jpg" alt="Serenity Logo">
+    <h2>SERENITY</h2>
+  </div>
+
+  <h1>Welcome back</h1>
+
+  <!-- Email -->
+  <div class="input-box">
+    <label>Email or Username</label>
+    <input type="text" id="email" placeholder="Enter email or username">
+    <div class="error" id="emailError">Please enter email or username</div>
+  </div>
+
+  <!-- Password -->
+  <div class="input-box">
+    <label>Password</label>
+    <input type="password" id="password" placeholder="Enter password">
+    <div class="error" id="passwordError">
+      Password must contain at least one special character (!@#$%^&)
+    </div>
+  </div>
+
+  <!-- Login Button -->
+  <button class="btn btn-green" onclick="login()">Continue</button>
+
+  <div class="divider"><span>or</span></div>
+
+  <!-- Social Logins -->
+  <div class="social-btn" onclick="socialLogin('Google')">
+    <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png">
+    Continue with Google
+  </div>
+
+  <div class="social-btn" onclick="socialLogin('Facebook')">
+    <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png">
+    Continue with Facebook
+  </div>
+
+  <div class="social-btn" onclick="socialLogin('Apple')">
+    <img src="https://cdn-icons-png.flaticon.com/512/831/831276.png">
+    Continue with Apple
+  </div>
+
+  <div class="signup-text">
+    Don’t have an account? <a href="signup.html">Sign up</a>
+  </div>
+
+</div>
+
+<footer>
+  © 2025 SERENITY | Designed with 💚 by Rida
+</footer>
+
+<script>
+function login(){
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  const emailError = document.getElementById("emailError");
+  const passwordError = document.getElementById("passwordError");
+
+  const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+  emailError.style.display = "none";
+  passwordError.style.display = "none";
+
+  let valid = true;
+
+  if(email === ""){
+    emailError.style.display = "block";
+    valid = false;
+  }
+
+  if(password === "" || !specialCharRegex.test(password)){
+    passwordError.style.display = "block";
+    valid = false;
+  }
+
+  if(!valid) return;
+
+  // Login success
+  localStorage.setItem("isLoggedIn", "true");
+  window.location.href = "playlist.html";
+}
+
+function socialLogin(platform){
+  alert("Logged in with " + platform);
+  localStorage.setItem("isLoggedIn", "true");
+  window.location.href = "playlist.html";
+}
+</script>
+
+</body>
+</html>
